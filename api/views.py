@@ -28,13 +28,8 @@ class EmployeeCreateView(APIView):
                     {"error": "invalid_input", "details": serializer.errors},
                     status=status.HTTP_400_BAD_REQUEST,
                     )
-        uuid = request.data.get("uuid")
-        username = request.data.get("username")
-        if not uuid or not username:
-            return Response(
-                    {"error": "uuid and username required"},
-                    status=status.HTTP_400_BAD_REQUEST,
-                    )
+        uuid = serializer.validated_data["uuid"]
+        username = serializer.validated_data["username"]
         password: str = secrets.token_urlsafe(8)
         totp_secret: str  = pyotp.random_base32()
 

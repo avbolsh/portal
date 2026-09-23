@@ -1,0 +1,17 @@
+{% extends "cabinet/base.html" %}
+
+{% block title %}Мои заявки{% endblock %}
+{% block content %}
+  <h1>Мои заявки на справки</h1>
+
+  <ul>
+    {% for req in requests %}
+      <li>
+        {{ req.get_certificate_type_display }} — {{ req.get_status_display }}
+        ({{ req.created_at|date:"d.m.Y H:i" }})
+      </li>
+    {% empty %}
+      <li>Заявок пока нет.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

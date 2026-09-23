@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Ввод TOTP</title>
-</head>
-<body>
+{% extends "cabinet/base.html" %}
+{% block title %}Ввод TOTP{% endblock %}
+{% block content %}
     <h1>Введите код TOTP</h1>
     <form method="post">
         {% csrf_token %}
@@ -14,5 +11,4 @@
 {% if error %}
   <div class="error">{{ error }}</div>
 {% endif %}    
-</body>
-</html>
+{% endblock %}

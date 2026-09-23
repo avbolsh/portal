@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.views.decorators.http import require_POST
+from cabinet.models import CertificateRequest
 
 
 def login_view(request):
@@ -54,3 +55,8 @@ def totp_view(request):
             else:
                 error = "Неверный код"
     return render(request, "cabinet/totp.html", {"error": error})
+
+@login_required
+def my_certificates_view(request):
+    cert_requests = CertificateRequest.objects.filter(user=request.user).order_by("-created_at")
+    return render(request, "cabinet/my_certificates.html", {"cert_requests": cert_requests})

@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Дашборд</title>
-</head>
-<body>
+{% extends "cabinet/base.html" %}
+
+{% block title %}Дашборд{% endblock %}
+
+{% block content %}
 <h1>Кабинет сотрудника</h1>
 <form method="post" action="{% url 'cabinet-logout' %}">
   {% csrf_token %}
   <button type="submit">Выйти</button>
 </form>
-</body>
-</html>
+{% endblock %}

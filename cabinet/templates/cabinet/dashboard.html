@@ -7,5 +7,9 @@
 </head>
 <body>
 <h1>Кабинет сотрудника</h1>
+<form method="post" action="{% url 'cabinet-logout' %}">
+  {% csrf_token %}
+  <button type="submit">Выйти</button>
+</form>
 </body>
 </html>

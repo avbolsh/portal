@@ -1,5 +1,5 @@
 import pyotp
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
@@ -19,6 +19,10 @@ def login_view(request):
             login(request, user)
             return redirect("cabinet-dashboard")
     return render(request, "cabinet/login.html")
+
+def logout_view(request):
+    logout(request)
+    return redirect("cabinet-login")
     
 
 @login_required

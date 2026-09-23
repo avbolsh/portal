@@ -1,14 +1,26 @@
 {% extends "cabinet/base.html" %}
+
 {% block title %}Ввод TOTP{% endblock %}
+
 {% block content %}
-    <h1>Введите код TOTP</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label for="code">Код:</label>
-        <input type="text" id="code" name="code" required>
-        <button type="submit">Проверить</button>
-    </form>
-{% if error %}
-  <div class="error">{{ error }}</div>
-{% endif %}    
+<div class="row justify-content-center">
+  <div class="col-12 col-md-5 col-lg-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h1 class="h4 card-title mb-4 text-center">Введите код TOTP</h1>
+        {% if error %}
+          <div class="alert alert-danger py-2">{{ error }}</div>
+        {% endif %}
+        <form method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="id_code" class="form-label">Код из приложения</label>
+            <input type="text" name="code" id="id_code" class="form-control text-center" required autofocus autocomplete="one-time-code">
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Проверить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

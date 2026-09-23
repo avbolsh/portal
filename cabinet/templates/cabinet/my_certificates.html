@@ -1,17 +1,71 @@
 {% extends "cabinet/base.html" %}
 
-{% block title %}Мои заявки{% endblock %}
-{% block content %}
-  <h1>Мои заявки на справки</h1>
+{% block title %}Мои заявки на справки{% endblock %}
 
-  <ul>
-    {% for req in requests %}
-      <li>
-        {{ req.get_certificate_type_display }} — {{ req.get_status_display }}
-        ({{ req.created_at|date:"d.m.Y H:i" }})
-      </li>
-    {% empty %}
-      <li>Заявок пока нет.</li>
-    {% endfor %}
-  </ul>
+{% block content %}
+<div class="row g-4">
+  <div class="col-12 col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="h5 card-title mb-3">Новая заявка</h2>
+        <form method="post" action="{% url 'cabinet-my-certificates' %}">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="id_certificate_type" class="form-label">Тип справки</label>
+            <select name="certificate_type" id="id_certificate_type" class="form-select" required>
+              <option value="income">О доходах</option>
+              <option value="employment">С места работы</option>
+              <option value="vacation">Об использованных отпусках</option>
+              <option value="other">Прочее</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="id_description" class="form-label">
+              Комментарий <span class="text-muted fw-normal">(необязательно, кроме типа «Прочее»)</span>
+            </label>
+            <textarea name="description" id="id_description" rows="3" class="form-control"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Создать заявку</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="h5 card-title mb-3">Список заявок</h2>
+        {% if requests %}
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Тип</th>
+                <th>Статус</th>
+                <th>Дата</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for req in requests %}
+              <tr>
+                <td>{{ req.get_certificate_type_display }}</td>
+                <td><span class="badge text-bg-{% if req.status == 'created' %}secondary{% elif req.status == 'processing' %}info{% elif req.status == 'ready' %}success{% else %}danger{% endif %}">{{ req.get_status_display }}</span></td>
+                <td class="text-nowrap">{{ req.created_at|date:"d.m.Y H:i" }}</td>
+              </tr>
+              {% if req.admin_comment %}
+              <tr>
+                <td colspan="3" class="small text-muted">Комментарий: {{ req.admin_comment }}</td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <p class="text-muted mb-0">Заявок пока нет.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

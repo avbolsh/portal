@@ -6,12 +6,14 @@ from rest_framework.views import APIView
 from rest_framework import status
 from .serializers import EmployeeCreateInputSerializer
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 User = get_user_model()
 
 
 class PingView(APIView):
+    permission_classes = [AllowAny]
+
     def get(self, request):
         return Response({"status": "ok"})
 

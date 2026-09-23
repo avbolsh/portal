@@ -11,5 +11,8 @@
         <input type="text" id="code" name="code" required>
         <button type="submit">Проверить</button>
     </form>
+{% if error %}
+  <div class="error">{{ error }}</div>
+{% endif %}    
 </body>
 </html>

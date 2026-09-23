@@ -15,3 +15,4 @@ class EmployeeCreateInputSerializer(serializers.Serializer):
     def validate_uuid(self, value):
         if User.objects.filter(uuid=value).exists():
             raise serializers.ValidationError("UUID already exists")
+        return value

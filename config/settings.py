@@ -142,4 +142,4 @@ REST_FRAMEWORK = {
     ],
 }
 
-LOGIN_URL = "/cabinet/login/"
+LOGIN_URL = "cabinet-login"

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ввод TOTP</title>
+</head>
+<body>
+    <h1>Введите код TOTP</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="code">Код:</label>
+        <input type="text" id="code" name="code" required>
+        <button type="submit">Проверить</button>
+    </form>
+</body>
+</html>

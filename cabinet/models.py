@@ -32,7 +32,7 @@ class CertificateRequest(models.Model):
             on_delete=models.CASCADE,
             related_name="certificate_requests",
             )
-    certifacate_type = models.CharField(
+    certificate_type = models.CharField(
             choices=TYPE_CHOICES,
             max_length=50,
             help_text="Тип справки (2-НДФЛ, с места работы и др.)")
@@ -45,6 +45,11 @@ class CertificateRequest(models.Model):
             choices=STATUS_CHOISES,
             default="created"
             )
+    admin_comment = models.TextField(
+            blank=True, 
+            max_length=255, 
+            help_text="Комментарий ответсвенного сотрудника"
+            )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -52,5 +57,5 @@ class CertificateRequest(models.Model):
         ordering = ["-created_at"]
 
     def __str__(self):
-        return f"Запрос {self.certifacate_type} от {self.user.username}"
+        return f"Запрос {self.certificate_type} от {self.user.username}"
 

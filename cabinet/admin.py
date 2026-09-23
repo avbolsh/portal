@@ -9,4 +9,4 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(CertificateRequest)
 class CertificateRequestAdmin(admin.ModelAdmin):
-    list_display = ("user", "certifacate_type", "status", "created_at")
+    list_display = ("user", "certificate_type", "status", "created_at", )

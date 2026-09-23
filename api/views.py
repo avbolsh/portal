@@ -1,4 +1,5 @@
 import secrets
+from django.views import generic
 import pyotp
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
@@ -7,6 +8,9 @@ from rest_framework import status
 from .serializers import EmployeeCreateInputSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework import generics
+from cabinet.models import CertificateRequest
+from .serializers import CertificateRequestSerializer
 
 User = get_user_model()
 
@@ -49,5 +53,10 @@ class EmployeeCreateView(APIView):
                 status=status.HTTP_201_CREATED,
             )
 
+class CertificateRequestsListCreateView(generics.ListAPIView):
+    queryset = CertificateRequest.objects.all()
+    serializer_class = CertificateRequestSerializer
 
-
+class CertificateRequestDetailView(generics.RetrieveUpdateAPIView):
+    queryset = CertificateRequest.objects.all()
+    serializer_class = CertificateRequestSerializer

@@ -13,7 +13,7 @@ class User(AbstractUser):
     totp_secret = models.CharField(max_length=128, blank=True)
 
 class CertificateRequest(models.Model):
-    STATUS_CHOISES = [
+    STATUS_CHOICES = [
             ("created", "Создан"),
             ("processing", "В обработке"),
             ("ready", "Готов"),
@@ -42,7 +42,7 @@ class CertificateRequest(models.Model):
             help_text="Комментарий сотрудника (период, цель и пр.)")
     status = models.CharField(
             max_length=20,
-            choices=STATUS_CHOISES,
+            choices=STATUS_CHOICES,
             default="created"
             )
     admin_comment = models.TextField(

@@ -1,5 +1,4 @@
 import secrets
-from django.views import generic
 import pyotp
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
@@ -53,7 +52,7 @@ class EmployeeCreateView(APIView):
                 status=status.HTTP_201_CREATED,
             )
 
-class CertificateRequestsListCreateView(generics.ListAPIView):
+class CertificateRequestsListView(generics.ListAPIView):
     queryset = CertificateRequest.objects.all()
     serializer_class = CertificateRequestSerializer
 

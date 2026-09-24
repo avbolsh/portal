@@ -61,6 +61,7 @@ python manage.py drf_create_token <username>
 |-------|-----------------------------|--------|----------|
 | GET   | `/api/ping/`                | нет    | Проверка живости |
 | POST  | `/api/employees/`           | Token  | Создание сотрудника |
+| POST  | `/api/employees/reset/`     | Token  | Сброс пароля и TOTP-секрета (`{"uuid": ...}`) |
 | GET   | `/api/certificates/`        | Token  | Список всех заявок на справки |
 | GET   | `/api/certificates/<id>/`   | Token  | Карточка заявки |
 | PATCH | `/api/certificates/<id>/`   | Token  | Смена `status`, `admin_comment` |
@@ -87,6 +88,18 @@ Content-Type: application/json
   "password": "pQ9_x2Lm-N4"
 }
 ```
+
+Ошибки создания: `400 {"error": "invalid_input"}` — некорректный ввод;
+`400 {"error": "already_exists"}` — сотрудник с таким `uuid` или `username`
+уже зарегистрирован. Сброс (`/api/employees/reset/`) возвращает тот же формат
+и инвалидирует прежние пароль и TOTP-секрет; `404 {"error": "not_found"}`,
+если `uuid` неизвестен.
+
+### Расширение 1С:ЗУП
+
+Кабинет интегрируется с ЗУП 3.1 через расширение конфигурации
+(папка [`1c_ext/`](1c_ext/README.md)): создание аккаунтов и сброс доступа из
+обработки в 1С, `uuid` = GUID сотрудника ЗУП, логин = табельный номер.
 
 Смена статуса заявки:
 

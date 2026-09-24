@@ -8,6 +8,10 @@ from cabinet.models import CertificateRequest
 from django.contrib import messages
 
 def login_view(request):
+
+    if request.user.is_authenticated:
+        return redirect("cabinet-dashboard")
+
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -33,6 +37,10 @@ def logout_view(request):
 @login_required
 def dashboard_view(request):
     return render(request, "cabinet/dashboard.html")
+
+@login_required
+def profile_view(request):
+    return render(request, "cabinet/profile.html")
 
 def totp_view(request):
     if request.method == "POST":

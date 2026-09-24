@@ -17,6 +17,7 @@
             <div class="navbar-nav me-auto">
                 <a class="nav-link" href="{% url 'cabinet-dashboard' %}">Главная</a>
                 <a class="nav-link" href="{% url 'cabinet-my-certificates' %}">Мои заявки</a>
+                <a class="nav-link" href="{% url 'cabinet-profile' %}">Профиль</a>
             </div>
             <form method="post" action="{% url 'cabinet-logout' %}" class="d-flex">
                 {% csrf_token %}

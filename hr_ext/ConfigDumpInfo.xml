@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ConfigDumpInfo xmlns="http://v8.1c.ru/8.3/xcf/dumpinfo" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" format="Hierarchical" version="2.20">
+	<ConfigVersions>
+		<Metadata name="Catalog.Сотрудники" id="323b4777-ea49-4a49-8bf8-4562022544ba" configVersion="bf2fd55db36495a389687a76875857812b9a8dd5"/>
+		<Metadata name="CommonModule.кс_КабинетКлиент" id="c2a7702f-152f-4d6d-92d6-89afc6dd2a13" configVersion="18241481b22fdf26992326577a0f605366cc43f3"/>
+		<Metadata name="CommonModule.кс_КабинетКлиент.Module" id="c2a7702f-152f-4d6d-92d6-89afc6dd2a13.0" configVersion="b34a2045d22209849778632c3460eb36da914e5e"/>
+		<Metadata name="Configuration.КабинетСотрудника" id="11bd072c-dbbf-432d-a505-5a75ee50bc28" configVersion="c6923d41d1b823b42f14feae934f08300a675fce"/>
+		<Metadata name="Constant.АдресКабинета" id="60514f64-5a6c-40db-bada-fb2093d7e4df" configVersion="4787a58433e4ea159fe524c3d2019a165225d184"/>
+		<Metadata name="Constant.ТокенСервисный" id="31048d6b-1409-45a8-8253-76b6c1c674e2" configVersion="eaaf36faa914cb18006b499e756e2907b9020b07"/>
+		<Metadata name="DataProcessor.кс_УправлениеДоступомКабинета" id="1d7fe72c-1ed7-4ba3-b1f2-eb589a28d83e" configVersion="b1667e74ab36a030b4b9f52320f7627ee0216192"/>
+		<Metadata name="DataProcessor.кс_УправлениеДоступомКабинета.Form.Форма" id="9d5f6a2c-4b1e-4c3a-8d2f-7e6a5b4c3d21" configVersion="8462845174a7f03a84bf9440f8ce07a7b4ebc381"/>
+		<Metadata name="InformationRegister.кс_АккаунтыКабинета" id="3c18008a-ad60-4c6e-901d-12f47c2e8cb3" configVersion="ebbb88c6514dbffe5e54e0a4896c43862610fb7f">
+			<Metadata name="InformationRegister.кс_АккаунтыКабинета.Resource.Активный" id="74d73c39-e2eb-4a1a-b7d7-8341ca1729bf"/>
+			<Metadata name="InformationRegister.кс_АккаунтыКабинета.Attribute.ДатаСоздания" id="77c6262f-ceff-4652-990f-b4a6903507f8"/>
+			<Metadata name="InformationRegister.кс_АккаунтыКабинета.Dimension.Сотрудник" id="88a426e5-da1f-453d-a4fe-54f6b1ee2823"/>
+		</Metadata>
+		<Metadata name="Language.Русский" id="59e81805-2260-4756-b867-89a441f97bb8" configVersion="f4a9a899e31d31f84111cf207b1951f6752aa755"/>
+	</ConfigVersions>
+</ConfigDumpInfo>

@@ -143,3 +143,5 @@ REST_FRAMEWORK = {
 }
 
 LOGIN_URL = "cabinet-login"
+
+HR_PROFILE_SOURCE = "mock" # Откуда брать данные о профиле сотрудника

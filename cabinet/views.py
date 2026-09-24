@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 from django.views.decorators.http import require_POST
 from cabinet.models import CertificateRequest
 from django.contrib import messages
+from .hr_source import get_employee_profile
 
 def login_view(request):
 
@@ -40,7 +41,8 @@ def dashboard_view(request):
 
 @login_required
 def profile_view(request):
-    return render(request, "cabinet/profile.html")
+    context = {"profile_data":get_employee_profile(request.user.uuid)}
+    return render(request, "cabinet/profile.html", context)
 
 def totp_view(request):
     if request.method == "POST":
@@ -68,6 +70,7 @@ def my_certificates_view(request):
     if request.method == "POST":
         certificate_type = request.POST.get("certificate_type")
         description = request.POST.get("description", "").strip()
+        from_profile = request.POST.get("source") == "profile"
 
         if certificate_type not in dict(CertificateRequest.TYPE_CHOICES):
             messages.error(request, "Неверный тип справки")
@@ -81,7 +84,10 @@ def my_certificates_view(request):
                 status="created",
             )
             messages.success(request, "Заявка создана")
-            return redirect("cabinet-my-certificates")
+            return redirect("cabinet-profile" if from_profile else "cabinet-my-certificates")
+
+        if from_profile:
+            return redirect("cabinet-profile")
 
     requests = CertificateRequest.objects.filter(user=request.user).order_by("-created_at")
     return render(request, "cabinet/my_certificates.html", {"requests": requests})

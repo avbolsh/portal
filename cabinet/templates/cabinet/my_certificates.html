@@ -3,38 +3,16 @@
 {% block title %}Мои заявки на справки{% endblock %}
 
 {% block content %}
-<div class="row g-4">
-  <div class="col-12 col-lg-5">
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-8">
     <div class="card shadow-sm">
       <div class="card-body">
-        <h2 class="h5 card-title mb-3">Новая заявка</h2>
-        <form method="post" action="{% url 'cabinet-my-certificates' %}">
-          {% csrf_token %}
-          <div class="mb-3">
-            <label for="id_certificate_type" class="form-label">Тип справки</label>
-            <select name="certificate_type" id="id_certificate_type" class="form-select" required>
-              <option value="income">О доходах</option>
-              <option value="employment">С места работы</option>
-              <option value="vacation">Об использованных отпусках</option>
-              <option value="other">Прочее</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="id_description" class="form-label">
-              Комментарий <span class="text-muted fw-normal">(необязательно, кроме типа «Прочее»)</span>
-            </label>
-            <textarea name="description" id="id_description" rows="3" class="form-control"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Создать заявку</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-12 col-lg-7">
-    <div class="card shadow-sm">
-      <div class="card-body">
-        <h2 class="h5 card-title mb-3">Список заявок</h2>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="h5 card-title mb-0">Список заявок</h2>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newRequestModal">
+            Добавить заявку
+          </button>
+        </div>
         {% if requests %}
         <div class="table-responsive">
           <table class="table table-hover align-middle mb-0">
@@ -65,6 +43,41 @@
         <p class="text-muted mb-0">Заявок пока нет.</p>
         {% endif %}
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="newRequestModal" tabindex="-1" aria-labelledby="newRequestModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form method="post" action="{% url 'cabinet-my-certificates' %}">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title" id="newRequestModalLabel">Новая заявка</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="id_certificate_type" class="form-label">Тип справки</label>
+            <select name="certificate_type" id="id_certificate_type" class="form-select" required>
+              <option value="income">О доходах</option>
+              <option value="employment">С места работы</option>
+              <option value="vacation">Об использованных отпусках</option>
+              <option value="other">Прочее</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="id_description" class="form-label">
+              Комментарий <span class="text-muted fw-normal">(необязательно, кроме типа «Прочее»)</span>
+            </label>
+            <textarea name="description" id="id_description" rows="3" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Отмена</button>
+          <button type="submit" class="btn btn-primary">Создать заявку</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

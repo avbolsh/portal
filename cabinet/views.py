@@ -20,6 +20,8 @@ def login_view(request):
                 return redirect("cabinet-totp")
             login(request, user)
             return redirect("cabinet-dashboard")
+        else:
+            messages.error(request, "Неверные логин или пароль")
     return render(request, "cabinet/login.html")
 
 @require_POST
@@ -33,9 +35,6 @@ def dashboard_view(request):
     return render(request, "cabinet/dashboard.html")
 
 def totp_view(request):
-
-    error = None
-
     if request.method == "POST":
         code = request.POST.get("code")
         user_id = request.session.get("auth_user_id")
@@ -45,7 +44,7 @@ def totp_view(request):
         user = User.objects.get(id=user_id)
 
         if not code:
-            error = "Введите код из приложения"
+            messages.error(request, "Введите код из приложения")
         else:
             totp = pyotp.TOTP(user.totp_secret)
             if totp.verify(code):
@@ -53,8 +52,8 @@ def totp_view(request):
                 del request.session["auth_user_id"]
                 return redirect("cabinet-dashboard")
             else:
-                error = "Неверный код"
-    return render(request, "cabinet/totp.html", {"error": error})
+                messages.error(request, "Неверный код")
+    return render(request, "cabinet/totp.html")
 
 @login_required
 def my_certificates_view(request):

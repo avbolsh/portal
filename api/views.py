@@ -92,9 +92,13 @@ class EmployeeCredentialsResetView(APIView):
             )
 
 class CertificateRequestsListView(generics.ListAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = CertificateRequest.objects.all()
     serializer_class = CertificateRequestSerializer
 
 class CertificateRequestDetailView(generics.RetrieveUpdateAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = CertificateRequest.objects.all()
     serializer_class = CertificateRequestSerializer

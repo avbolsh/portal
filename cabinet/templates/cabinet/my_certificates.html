@@ -18,6 +18,7 @@
           <table class="table table-hover align-middle mb-0">
             <thead>
               <tr>
+                <th>#</th>
                 <th>Тип</th>
                 <th>Статус</th>
                 <th>Дата</th>
@@ -26,19 +27,23 @@
             <tbody>
               {% for req in requests %}
               <tr>
+                <td><button type="button" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#certificateModal-{{ req.pk }}">{{ req.pk }}</button></td>
                 <td>{{ req.get_certificate_type_display }}</td>
                 <td><span class="badge text-bg-{% if req.status == 'created' %}secondary{% elif req.status == 'processing' %}info{% elif req.status == 'ready' %}success{% else %}danger{% endif %}">{{ req.get_status_display }}</span></td>
                 <td class="text-nowrap">{{ req.created_at|date:"d.m.Y H:i" }}</td>
               </tr>
               {% if req.admin_comment %}
               <tr>
-                <td colspan="3" class="small text-muted">Комментарий: {{ req.admin_comment }}</td>
+                <td colspan="4" class="small text-muted">Комментарий: {{ req.admin_comment }}</td>
               </tr>
               {% endif %}
               {% endfor %}
             </tbody>
           </table>
         </div>
+        {% for req in requests %}
+        {% include "cabinet/includes/certificate_detail_modal.html" with cert_request=req %}
+        {% endfor %}
         {% else %}
         <p class="text-muted mb-0">Заявок пока нет.</p>
         {% endif %}

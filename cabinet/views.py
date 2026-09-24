@@ -1,6 +1,6 @@
 import pyotp
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.views.decorators.http import require_POST
@@ -91,3 +91,10 @@ def my_certificates_view(request):
 
     requests = CertificateRequest.objects.filter(user=request.user).order_by("-created_at")
     return render(request, "cabinet/my_certificates.html", {"requests": requests})
+
+@login_required
+def certificate_detail_view(request, pk):
+    cert_request = get_object_or_404(CertificateRequest, pk=pk, user=request.user)
+    return render(request, "cabinet/certificate_detail.html", {"cert_request": cert_request})
+    
+

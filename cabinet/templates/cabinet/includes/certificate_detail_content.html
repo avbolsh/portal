@@ -1,0 +1,26 @@
+<ul class="list-group list-group-flush">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <span class="text-muted">Тип справки</span>
+    <span class="text-end">{{ cert_request.get_certificate_type_display }}</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <span class="text-muted">Статус</span>
+    <span class="badge text-bg-{% if cert_request.status == 'created' %}secondary{% elif cert_request.status == 'processing' %}info{% elif cert_request.status == 'ready' %}success{% else %}danger{% endif %}">{{ cert_request.get_status_display }}</span>
+  </li>
+  <li class="list-group-item">
+    <div class="text-muted small">Комментарий сотрудника</div>
+    <div>{{ cert_request.description|linebreaksbr|default:"—" }}</div>
+  </li>
+  <li class="list-group-item">
+    <div class="text-muted small">Комментарий ответственного</div>
+    <div>{{ cert_request.admin_comment|linebreaksbr|default:"—" }}</div>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <span class="text-muted">Создана</span>
+    <span class="text-end text-nowrap">{{ cert_request.created_at|date:"d.m.Y H:i" }}</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <span class="text-muted">Обновлена</span>
+    <span class="text-end text-nowrap">{{ cert_request.updated_at|date:"d.m.Y H:i" }}</span>
+  </li>
+</ul>
